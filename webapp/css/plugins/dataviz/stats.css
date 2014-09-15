@@ -1,0 +1,19 @@
+.stat , .stat tr, .stat td {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.stat {
+    margin: 15px;
+}
+.stat td {
+    text-align: center;
+}
+
+/*#table {
+    float: right;
+}*/
+
+.btn-group-vertical {
+    float: left;
+}

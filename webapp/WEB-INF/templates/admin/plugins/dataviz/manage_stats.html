@@ -1,0 +1,56 @@
+<#include "managestat_tabs.html" />
+<@tabs tab="stat" />
+
+<div class="row-fluid" >
+    <div class="span12">
+
+        <@messages infos=infos />
+
+        <form method="post"  action="jsp/admin/plugins/dataviz/ManageStats.jsp">
+            <button name="view_createStat" class="btn btn-primary pull-right" type="submit">
+                <i class="icon-plus icon-white"></i>
+                #i18n{dataviz.manage_stats.buttonAdd}
+            </button>
+        </form>
+
+    <h4>#i18n{dataviz.manage_stats.tableLabel}</h4>    
+
+    <@paginationAdmin paginator=paginator combo=1 />
+    
+    <table class="table table-condensed table-striped">
+        <tr>
+                    <input type="hidden" id="id" name="id"  />
+                    <th>#i18n{dataviz.manage_stats.columnDescription}</th>
+                    <th>#i18n{dataviz.manage_stats.columnRequeteSql}</th>
+            <th>#i18n{portal.util.labelActions}</th>
+        </tr>
+            <#list stat_list as stat >
+        <tr>
+                    <input type="hidden" id="id" name="id"  />
+                    <td>
+                        ${stat.description}
+                    </td>
+                    <td>
+                        ${stat.requeteSql}
+                    </td>
+        <td>
+            <a href="jsp/admin/plugins/dataviz/ManageStats.jsp?view=modifyStat&id=${stat.id}"
+               class="btn btn-primary btn-small" title="#i18n{portal.util.labelModify}">
+                <i class="icon-edit icon-white"></i>
+            </a>
+
+            <a href="jsp/admin/plugins/dataviz/ManageStats.jsp?action=confirmRemoveStat&id=${stat.id}"
+               class="btn btn-danger btn-small" title="#i18n{portal.util.labelDelete}" >
+                <i class="icon-trash icon-white"></i>
+            </a>
+        </td>
+        </tr>
+        </#list>
+    </table>
+
+    <@paginationAdmin paginator=paginator />
+
+    </div>
+</div>
+
+

@@ -1,0 +1,11 @@
+<#macro tabs tab >
+<div>
+    <ul class="nav nav-tabs">
+        <li <#if tab="stat">class="active"</#if>>
+            <a href="jsp/admin/plugins/dataviz/ManageStats.jsp">
+                #i18n{dataviz.manage_stats.pageTitle}
+            </a>
+        </li>
+    </ul>
+</div>
+</#macro>
