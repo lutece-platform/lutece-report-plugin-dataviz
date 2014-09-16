@@ -42,4 +42,11 @@
         <jiraProjectName>DATAVIZ</jiraProjectName>
         <jiraComponentId></jiraComponentId>
     </properties>
+    
+    <scm>
+        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/cms/plugin-document</connection>
+        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/cms/plugin-document</developerConnection>
+        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/cms/plugin-document</url>
+    </scm>
+    
 </project>
