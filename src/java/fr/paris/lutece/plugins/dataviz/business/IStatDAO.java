@@ -91,8 +91,20 @@ public interface IStatDAO
 	 */
 	Collection<Stat> selectStatsList( Plugin plugin );
         
+        /**
+	 * Executes the SQL request and returns it result
+	 * @param plugin the Plugin
+         * @param sql the SQL request
+	 * @return The result of the SQL request
+	 */
         int getSingleResult( String sql, Plugin _plugin );
     
+        /**
+	 * Executes the SQL request and returns it result
+	 * @param plugin the Plugin
+         * @param sql the SQL request
+	 * @return The result of the SQL request
+	 */
         Object getListResult ( String sql, Plugin plugin);
 	
 }

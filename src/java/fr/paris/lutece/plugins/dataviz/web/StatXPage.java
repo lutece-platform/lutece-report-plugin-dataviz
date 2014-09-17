@@ -105,6 +105,12 @@ public class StatXPage extends MVCApplication
     // Session variable to store working values
     private Stat _stat;
     
+    /**
+     * Returns the form of main page
+     *
+     * @param request The Http request
+     * @return the html code of the main page
+     */
     @View( value = VIEW_HOME , defaultView = true )
     public XPage viewHome( HttpServletRequest request )
     {

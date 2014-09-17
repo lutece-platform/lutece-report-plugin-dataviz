@@ -15,7 +15,6 @@ import java.util.List;
 
 /**
  *
- * @author evrardmax
  */
 public class StatsService extends AbstractCacheableService
 {
@@ -27,8 +26,7 @@ public class StatsService extends AbstractCacheableService
     {
     }
 /**
- * 
- * @return 
+ * @return The singleton
  */
     public static synchronized StatsService instance(  )
     {
@@ -41,6 +39,9 @@ public class StatsService extends AbstractCacheableService
         return _singleton;
     }
 
+    /**
+     *  Init the Cache
+     */
     private void init(  )
     {
         initCache();
@@ -48,6 +49,12 @@ public class StatsService extends AbstractCacheableService
         _listStat = SpringContextService.getBeansOfType( IStat.class );
     }
 
+    /**
+     * Retrieves the stat whose name is pass in parameter
+     * @param strStatName
+     * @return strResult
+     * @throws StatNotFoundException 
+     */
     public String getStat( String strStatName ) throws StatNotFoundException
     {
         _listStat = SpringContextService.getBeansOfType( IStat.class );

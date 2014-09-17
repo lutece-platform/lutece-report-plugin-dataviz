@@ -9,8 +9,8 @@ package fr.paris.lutece.plugins.dataviz.business;
 import fr.paris.lutece.util.ReferenceList;
 
 /**
- *
- * @author evrardmax
+ * Override getResult to return result of ListStat
+ * @return The list
  */
 public class StatList extends AbstractStat
 {

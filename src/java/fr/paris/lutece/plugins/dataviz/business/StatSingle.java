@@ -7,8 +7,8 @@
 package fr.paris.lutece.plugins.dataviz.business;
 
 /**
- *
- * @author evrardmax
+ * Override getResult to return result of SingleStat
+ * @return The nResult
  */
 public class StatSingle extends AbstractStat
 {

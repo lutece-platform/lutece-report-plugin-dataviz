@@ -20,8 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- *
- * @author evrardmax
+ * Class for format stat into Json
  */
 public class StatServlet extends HttpServlet
 {

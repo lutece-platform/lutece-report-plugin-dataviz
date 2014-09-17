@@ -57,7 +57,6 @@ public class Stat
         
 	private String _strRequeteSql;        
         private String _name;
-        private String _type;
         private ReferenceList _list;
 	/**
 	 * Returns the Id
@@ -110,48 +109,40 @@ public class Stat
 	{
 		_strRequeteSql = strRequeteSql;
 	}
-        
-        public Object getListResult(  )
-        {
-            ReferenceList list = (ReferenceList) StatHome.getListResult ( getRequeteSql() );
-
-            return list;
-        }
-        
-        public Object getResult(  )
-        {
-            int nResult = StatHome.getSingleResult( getRequeteSql(  ) );
-
-            return nResult;
-        }
     
+        /**
+         * Returns the Name
+         * @return The Name
+         */
         public String getName ( )
         {
             return _name;
         }
 
+        /**
+	 * Sets the Name
+	 * @param Name The Name
+	 */
         public void setName ( String name )
         {
             _name = name;
         }
 
+        /**
+         * Returns the List
+         * @return The List
+         */
         public ReferenceList getList ( )
         {
             return _list;
         }
 
+        /**
+	 * Sets the RequestS=ql
+	 * @param List The List
+         */
         public void setList ( ReferenceList list )
         {
             _list = list;
-        }
-        
-        public String getType ( )
-        {
-            return _type;
-        }
-
-        public void setType ( String type )
-        {
-            _type = type;
         }
 }
