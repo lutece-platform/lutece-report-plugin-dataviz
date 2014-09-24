@@ -29,6 +29,12 @@ public interface IStat
      * @return The Sql
      */
     String getSql(  );
+    
+    /**
+     * Returns the Id
+     * @return The Id
+     */
+    String getId(  );
 
     /**
      * Sets the Name
@@ -47,4 +53,10 @@ public interface IStat
      * @param strSql The Sql
      */
     void setSql( String strSql );
+    
+    /**
+     * Sets the Id
+     * @param strId The Id
+     */
+    void setId( String strId );
 }

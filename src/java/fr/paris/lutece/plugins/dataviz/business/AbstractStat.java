@@ -43,6 +43,7 @@ public class AbstractStat implements IStat
     private String _strName;
     private String _strSql;
     private Object _Result;
+    private String _strId;
 
     /**
      * Returns the Name
@@ -102,5 +103,25 @@ public class AbstractStat implements IStat
     public void setResult( Object Result )
     {
         _Result = Result;
+    }
+    
+    /**
+     * Returns the Id
+     * @return The Id
+     */
+    @Override
+    public String getId(  )
+    {
+        return _strId;
+    }
+
+    /**
+     * Sets the Id
+     * @param strId The Id
+     */
+    @Override
+    public void setId( String strId )
+    {
+        _strId = strId;
     }
 }

@@ -32,53 +32,53 @@
  * License 1.0
  */
 
-package fr.paris.lutece.plugins.dataviz.business;
-
-import fr.paris.lutece.test.LuteceTestCase;
-
-
-public class StatBusinessTest extends LuteceTestCase
-{
-    private final static int ID1 = 1;
-    private final static int ID2 = 2;
-    private final static String DESCRIPTION1 = "Description1";
-    private final static String DESCRIPTION2 = "Description2";
-    private final static String REQUETESQL1 = "RequeteSql1";
-    private final static String REQUETESQL2 = "RequeteSql2";
-
-    public void testBusiness(  )
-    {
-        // Initialize an object
-        Stat stat = new Stat();
-        stat.setId( ID1 );
-        stat.setDescription( DESCRIPTION1 );
-        stat.setRequeteSql( REQUETESQL1 );
-
-        // Create test
-        StatHome.create( stat );
-        Stat statStored = StatHome.findByPrimaryKey( stat.getId() );
-        assertEquals( statStored.getId() , stat.getId() );
-        assertEquals( statStored.getDescription() , stat.getDescription() );
-        assertEquals( statStored.getRequeteSql() , stat.getRequeteSql() );
-
-        // Update test
-        stat.setId( ID2 );
-        stat.setDescription( DESCRIPTION2 );
-        stat.setRequeteSql( REQUETESQL2 );
-        StatHome.update( stat );
-        statStored = StatHome.findByPrimaryKey( stat.getId() );
-        assertEquals( statStored.getId() , stat.getId() );
-        assertEquals( statStored.getDescription() , stat.getDescription() );
-        assertEquals( statStored.getRequeteSql() , stat.getRequeteSql() );
-
-        // List test
-        StatHome.getStatsList();
-
-        // Delete test
-        StatHome.remove( stat.getId() );
-        statStored = StatHome.findByPrimaryKey( stat.getId() );
-        assertNull( statStored );
-        
-    }
-
-}
+//package fr.paris.lutece.plugins.dataviz.business;
+//
+//import fr.paris.lutece.test.LuteceTestCase;
+//
+//
+//public class StatBusinessTest extends LuteceTestCase
+//{
+//    private final static int ID1 = 1;
+//    private final static int ID2 = 2;
+//    private final static String DESCRIPTION1 = "Description1";
+//    private final static String DESCRIPTION2 = "Description2";
+//    private final static String REQUETESQL1 = "RequeteSql1";
+//    private final static String REQUETESQL2 = "RequeteSql2";
+//
+//    public void testBusiness(  )
+//    {
+//        // Initialize an object
+//        Stat stat = new Stat();
+//        stat.setId( ID1 );
+//        stat.setDescription( DESCRIPTION1 );
+//        stat.setRequeteSql( REQUETESQL1 );
+//
+//        // Create test
+//        StatHome.create( stat );
+//        Stat statStored = StatHome.findByPrimaryKey( stat.getId() );
+//        assertEquals( statStored.getId() , stat.getId() );
+//        assertEquals( statStored.getDescription() , stat.getDescription() );
+//        assertEquals( statStored.getRequeteSql() , stat.getRequeteSql() );
+//
+//        // Update test
+//        stat.setId( ID2 );
+//        stat.setDescription( DESCRIPTION2 );
+//        stat.setRequeteSql( REQUETESQL2 );
+//        StatHome.update( stat );
+//        statStored = StatHome.findByPrimaryKey( stat.getId() );
+//        assertEquals( statStored.getId() , stat.getId() );
+//        assertEquals( statStored.getDescription() , stat.getDescription() );
+//        assertEquals( statStored.getRequeteSql() , stat.getRequeteSql() );
+//
+//        // List test
+//        StatHome.getStatsList();
+//
+//        // Delete test
+//        StatHome.remove( stat.getId() );
+//        statStored = StatHome.findByPrimaryKey( stat.getId() );
+//        assertNull( statStored );
+//        
+//    }
+//
+//}

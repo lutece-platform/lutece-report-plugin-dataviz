@@ -10,9 +10,9 @@
     text-align: center;
 }
 
-/*#table {
-    float: right;
-}*/
+.singleStats{
+    text-align: center;
+}
 
 .btn-group-vertical {
     float: left;

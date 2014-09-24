@@ -57,65 +57,6 @@ public final class StatHome
 	private StatHome(  )
 	{
 	}
-
-	/**
-	 * Create an instance of the stat class
-	 * @param stat The instance of the Stat which contains the informations to store
-	 * @return The  instance of stat which has been created with its primary key.
-	 */
-	public static Stat create( Stat stat )
-	{
-		_dao.insert( stat, _plugin );
-
-		return stat;
-	}
-
-
-	/**
-	 * Update of the stat which is specified in parameter
-	 * @param stat The instance of the Stat which contains the data to store
-	 * @return The instance of the  stat which has been updated
-	 */
-	public static Stat update( Stat stat )
-	{
-		_dao.store( stat, _plugin );
-
-		return stat;
-	}
-
-
-	/**
-	 * Remove the stat whose identifier is specified in parameter
-	 * @param nStatId The stat Id
-	 */
-	public static void remove( int nStatId )
-	{
-		_dao.delete( nStatId, _plugin );
-	}
-
-
-	///////////////////////////////////////////////////////////////////////////
-	// Finders
-
-	/**
-	 * Returns an instance of a stat whose identifier is specified in parameter
-	 * @param nKey The stat primary key
-	 * @return an instance of Stat
-	 */
-	public static Stat findByPrimaryKey( int nKey )
-	{
-		return _dao.load( nKey, _plugin);
-	}
-
-
-	/**
-	 * Load the data of all the stat objects and returns them in form of a collection
-	 * @return the collection which contains the data of all the stat objects
-	 */
-	public static Collection<Stat> getStatsList( )
-	{
-		return _dao.selectStatsList( _plugin );
-	}
         
         public static int getSingleResult( String sql )
         {

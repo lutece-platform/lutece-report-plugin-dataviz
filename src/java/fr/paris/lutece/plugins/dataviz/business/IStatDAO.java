@@ -46,50 +46,50 @@ import java.util.Collection;
 public interface IStatDAO
 {
 
-
-	/**
-	 * Insert a new record in the table.
-	 * @param stat instance of the Stat object to insert
-	 * @param plugin the Plugin
-	 */
-	void insert( Stat stat, Plugin plugin );
-
-
-
-	/**
-	 * Update the record in the table
-	 * @param stat the reference of the Stat
-	 * @param plugin the Plugin
-	 */
-	void store( Stat stat, Plugin plugin );
-
-
-	/**
-	 * Delete a record from the table
-	 * @param nIdStat int identifier of the Stat to delete
-	 * @param plugin the Plugin
-	 */
-	void delete( int nIdStat, Plugin plugin );
-
-	///////////////////////////////////////////////////////////////////////////
-	// Finders
-
-	/**
-	 * Load the data from the table
-	 * @param nKey The identifier of the stat
-	 * @param plugin the Plugin
-	 * @return The instance of the stat
-	 */
-	Stat load( int nKey, Plugin plugin );
-
-
-
-	/**
-	 * Load the data of all the stat objects and returns them as a collection
-	 * @param plugin the Plugin
-	 * @return The collection which contains the data of all the stat objects
-	 */
-	Collection<Stat> selectStatsList( Plugin plugin );
+//
+//	/**
+//	 * Insert a new record in the table.
+//	 * @param stat instance of the Stat object to insert
+//	 * @param plugin the Plugin
+//	 */
+//	void insert( Stat stat, Plugin plugin );
+//
+//
+//
+//	/**
+//	 * Update the record in the table
+//	 * @param stat the reference of the Stat
+//	 * @param plugin the Plugin
+//	 */
+//	void store( Stat stat, Plugin plugin );
+//
+//
+//	/**
+//	 * Delete a record from the table
+//	 * @param nIdStat int identifier of the Stat to delete
+//	 * @param plugin the Plugin
+//	 */
+//	void delete( int nIdStat, Plugin plugin );
+//
+//	///////////////////////////////////////////////////////////////////////////
+//	// Finders
+//
+//	/**
+//	 * Load the data from the table
+//	 * @param nKey The identifier of the stat
+//	 * @param plugin the Plugin
+//	 * @return The instance of the stat
+//	 */
+//	Stat load( int nKey, Plugin plugin );
+//
+//
+//
+//	/**
+//	 * Load the data of all the stat objects and returns them as a collection
+//	 * @param plugin the Plugin
+//	 * @return The collection which contains the data of all the stat objects
+//	 */
+//	Collection<Stat> selectStatsList( Plugin plugin );
         
         /**
 	 * Executes the SQL request and returns it result

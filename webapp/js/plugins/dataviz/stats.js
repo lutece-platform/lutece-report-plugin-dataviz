@@ -10,7 +10,7 @@ $(document).ready(function() {
         $("#singleStats").slideToggle();
     });
     $('button[id*="buttons_"]').click(function(){
-        var divName = $(this).text();
+        var divName = $(this).attr("name");
         if ($("#div_" + divName).is(':visible')){
             $("#div_" + divName).slideToggle();
         }
@@ -92,8 +92,8 @@ $(document).ready(function() {
         });
         $("#pie_" + listName).slideUp();
         $("#button_" + listName).click(function(){
-            $('#bar_' + listName).slideToggle();
-            $("#pie_" + listName).slideToggle();
+            $('#bar_' + listName).slideToggle(0);
+            $("#pie_" + listName).slideToggle(0);
         });
     });
 });

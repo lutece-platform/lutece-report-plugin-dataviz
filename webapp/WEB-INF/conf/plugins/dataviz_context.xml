@@ -7,20 +7,81 @@
     <bean id="dataviz.statRest"  class="fr.paris.lutece.plugins.dataviz.web.rs.StatRest" />
 
     <bean id="dataviz.statDAO"  class="fr.paris.lutece.plugins.dataviz.business.StatDAO" />
-    <bean id="dataviz.NumbUser" class="fr.paris.lutece.plugins.dataviz.business.StatSingle" > 
+    <bean id="dataviz.Stats.VoteCount" class="fr.paris.lutece.plugins.dataviz.business.StatSingle" > 
         <property name="name"> 
-            <value>Name</value>
+            <value>Nombre de votes</value>
+        </property>
+        <property name="id"> 
+            <value>VoteCount</value>
         </property>
         <property name="Sql">
-            <value>Request StatSingle</value>
+            <value>SELECT count( * ) FROM dataviz_data</value>
         </property>
     </bean>
-    <bean id="dataviz.ProjAvgUser" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
+    <bean id="dataviz.Stats.NumbUser" class="fr.paris.lutece.plugins.dataviz.business.StatSingle" > 
         <property name="name"> 
-            <value>Name</value>
+            <value>Nombres de votants</value>
+        </property>
+        <property name="id"> 
+            <value>NumbUser</value>
         </property>
         <property name="Sql">
-            <value>Request StatList</value>
+            <value>SELECT count( DISTINCT id_user ) FROM dataviz_data</value>
+        </property>
+    </bean>
+    <bean id="dataviz.Stats.AverageAge" class="fr.paris.lutece.plugins.dataviz.business.StatSingle" > 
+        <property name="name"> 
+            <value>Age moyen</value>
+        </property>
+        <property name="id"> 
+            <value>AverageAge</value>
+        </property>
+        <property name="Sql">
+            <value>SELECT AVG ( a.age ) FROM ( SELECT DISTINCT id_user, age FROM dataviz_data ) AS a</value>
+        </property>
+    </bean>
+    <bean id="dataviz.Stats.ProjVote" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
+        <property name="name"> 
+            <value>Nombre de votes par projets</value>
+        </property>
+        <property name="id"> 
+            <value>ProjVote</value>
+        </property>
+        <property name="Sql">
+            <value>SELECT id_projet, count( * ) FROM dataviz_data GROUP BY id_projet</value>
+        </property>
+    </bean>
+    <bean id="dataviz.Stats.ProjAvgUser" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
+        <property name="name"> 
+            <value>Age moyen par projets</value>
+        </property>
+        <property name="id"> 
+            <value>ProjAvgUser</value>
+        </property>
+        <property name="Sql">
+            <value>SELECT id_projet, AVG (age) FROM dataviz_data GROUP BY id_projet</value>
+        </property>
+    </bean>
+    <bean id="dataviz.Stats.NumbVoteArr" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
+        <property name="name"> 
+            <value>Nombre de votes par arrondissement</value>
+        </property>
+        <property name="id"> 
+            <value>NumbVoteArr</value>
+        </property>
+        <property name="Sql">
+            <value>SELECT arrondissement, count( * ) FROM dataviz_data GROUP BY arrondissement</value>
+        </property>
+    </bean>
+    <bean id="dataviz.Stats.NumbUserArr" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
+        <property name="name"> 
+            <value>Nombres de votants par arrondissement</value>
+        </property>
+        <property name="id"> 
+            <value>NumbUserArr</value>
+        </property>
+        <property name="Sql">
+            <value>SELECT arrondissement, count( DISTINCT id_user ) FROM dataviz_data GROUP BY arrondissement</value>
         </property>
     </bean>
 </beans>

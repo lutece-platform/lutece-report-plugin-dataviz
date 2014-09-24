@@ -43,72 +43,10 @@ import org.hibernate.validator.constraints.*;
  */ 
 public class Stat
 {
-	// Variables declarations 
-        
-	private int _nId;
-        // @NotEmpty( message = "#i18n{dataviz.validation.stat.Description.notEmpty}" )
-        @NotEmpty( message = "#i18n{portal.validation.message.notEmpty}" )
-        
-	private String _strDescription;
-        // @NotEmpty( message = "#i18n{dataviz.validation.stat.RequeteSql.notEmpty}" )
-        @NotEmpty( message = "#i18n{portal.validation.message.notEmpty}" )
-        // @Size( max = 255 , message = "#i18n{dataviz.validation.stat.RequeteSql.size}" ) 
-        @Size( max = 255 , message = "#i18n{portal.validation.message.sizeMax}" ) 
-        
-	private String _strRequeteSql;        
+	// Variables declarations         
         private String _name;
         private ReferenceList _list;
-	/**
-	 * Returns the Id
-	 * @return The Id
-	 */
-	public int getId()
-	{
-		return _nId;
-	}
-
-	/**
-	 * Sets the Id
-	 * @param nId The Id
-	 */ 
-	public void setId( int nId )
-	{
-		_nId = nId;
-	}
-	/**
-	 * Returns the Description
-	 * @return The Description
-	 */
-	public String getDescription()
-	{
-		return _strDescription;
-	}
-
-	/**
-	 * Sets the Description
-	 * @param strDescription The Description
-	 */ 
-	public void setDescription( String strDescription )
-	{
-		_strDescription = strDescription;
-	}
-	/**
-	 * Returns the RequeteSql
-	 * @return The RequeteSql
-	 */
-	public String getRequeteSql()
-	{
-		return _strRequeteSql;
-	}
-
-	/**
-	 * Sets the RequeteSql
-	 * @param strRequeteSql The RequeteSql
-	 */ 
-	public void setRequeteSql( String strRequeteSql )
-	{
-		_strRequeteSql = strRequeteSql;
-	}
+        private String _id;
     
         /**
          * Returns the Name
@@ -128,6 +66,24 @@ public class Stat
             _name = name;
         }
 
+        /**
+         * Returns the Id
+         * @return The Id
+         */
+        public String getId ( )
+        {
+            return _id;
+        }
+
+        /**
+	 * Sets the Id
+	 * @param Id The Id
+	 */
+        public void setId ( String id )
+        {
+            _id = id;
+        }
+        
         /**
          * Returns the List
          * @return The List
