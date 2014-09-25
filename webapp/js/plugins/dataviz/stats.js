@@ -4,24 +4,27 @@
  * and open the template in the editor.
  */
 $(document).ready(function() {
-    $(".stats").slideUp();
     $("#singleStat").click(function(){
-        $('div[id*="div_"]').slideUp();
-        $("#singleStats").slideToggle();
+        if ($("#singleStats").is(':visible')){
+            $("#singleStats").slideUp(200);
+        }
+        else {
+            $('.toggle').slideUp(200);
+            $("#singleStats").slideDown(200);
+        }
     });
     $('button[id*="buttons_"]').click(function(){
         var divName = $(this).attr("name");
-        if ($("#div_" + divName).is(':visible')){
-            $("#div_" + divName).slideToggle();
+        if ($(".div_" + divName).is(':visible')){
+            $(".div_" + divName).slideUp(200);
         }
         else {
-            $(".stats").slideUp();
-            $("#div_" + divName).slideToggle();
+            $('.toggle').slideUp(0);
+            $(".div_" + divName).slideToggle(200);
         }
-        
     });
     $('table.stat').each(function() {
-        var listName = $(this).parent().attr('class');
+        var listName = $(this).parent().attr('id');
         var tabCode = [];
         var tabName = [];
         $(this).find('td.codeValue').each(function() {
@@ -90,10 +93,10 @@ $(document).ready(function() {
                 }
             }
         });
-        $("#pie_" + listName).slideUp();
         $("#button_" + listName).click(function(){
-            $('#bar_' + listName).slideToggle(0);
-            $("#pie_" + listName).slideToggle(0);
+            $('#div_bar_' + listName).slideToggle(0);
+            $("#div_pie_" + listName).slideToggle(0);
         });
-    });
+    });   
+    $('.toggle').slideUp(0);
 });
