@@ -4,25 +4,6 @@
  * and open the template in the editor.
  */
 $(document).ready(function() {
-    $("#singleStat").click(function(){
-        if ($("#singleStats").is(':visible')){
-            $("#singleStats").slideUp(200);
-        }
-        else {
-            $('.toggle').slideUp(200);
-            $("#singleStats").slideDown(200);
-        }
-    });
-    $('button[id*="buttons_"]').click(function(){
-        var divName = $(this).attr("name");
-        if ($(".div_" + divName).is(':visible')){
-            $(".div_" + divName).slideUp(200);
-        }
-        else {
-            $('.toggle').slideUp(0);
-            $(".div_" + divName).slideToggle(200);
-        }
-    });
     $('table.stat').each(function() {
         var listName = $(this).parent().attr('id');
         var tabCode = [];
@@ -50,7 +31,7 @@ $(document).ready(function() {
                             showDataLabels: true
                         }
                     },
-                    legend: {show: true, location: 'e'}
+                    legend: {show: true, location: 'e', rendererOptions: {numberColumns: 2}}
                 }
         );
         var s1 = tabName;
@@ -76,8 +57,7 @@ $(document).ready(function() {
 // A value of "outside" would not shrink the grid and allow
 // the legend to overflow the container.
             legend: {
-                show: true,
-                placement: 'outsideGrid'
+                show: false
             },
             axes: {
 // Use a category axis on the x axis and use our custom ticks.
@@ -97,6 +77,25 @@ $(document).ready(function() {
             $('#div_bar_' + listName).slideToggle(0);
             $("#div_pie_" + listName).slideToggle(0);
         });
-    });   
+    });    
+    $("#singleStat").click(function(){
+        if ($("#singleStats").is(':visible')){
+            $("#singleStats").slideUp(200);
+        }
+        else {
+            $('.toggle').slideUp(200);
+            $("#singleStats").slideDown(200);
+        }
+    });
+    $('button[id*="buttons_"]').click(function(){
+        var divName = $(this).attr("name");
+        if ($(".div_" + divName).is(':visible')){
+            $(".div_" + divName).slideUp(200);
+        }
+        else {
+            $('.toggle').slideUp(0);
+            $(".div_" + divName).slideToggle(200);
+        }
+    });
     $('.toggle').slideUp(0);
 });
