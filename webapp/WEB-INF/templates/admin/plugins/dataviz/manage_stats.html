@@ -3,7 +3,7 @@
         <div class="box box-info">
             <div class="box-header">
                 <i class="fa fa-bar-chart-o"></i>
-                <h3 class="box-title">Liste des stats</h3>
+                <h3 class="box-title">#i18n{dataviz.manage_stats.titleCacheList}</h3>
             </div>
         </div>
     </div>
@@ -15,7 +15,6 @@
                 <div class="box-header"></div>
                 <div class="box-body">
                     <div class="btn-group-vertical">
-                        <button class="btn btn-flat btn-info" id="singleStat">Stats simple</button>
                         <#list list_List as statList>
                         <button class="btn btn-flat btn-info" id="buttons_${statList.id}" name="${statList.id}">${statList.name}</button>
                         </#list>
@@ -26,7 +25,7 @@
             <div class="box box-info toggle div_${statList.id}">
                 <div class="box-header"></div>
                 <div class="box-body" id="${statList.id}">
-                    <table class="stat">
+                    <table class="stat ${statList.graphType}">
                         <tr><td class="statName" colspan="2">${statList.name}</td></tr>
                         <#list statList.list as multiStat>
                         <tr>
@@ -40,30 +39,21 @@
             </#list>
         </div>
         <div class="col-md-8">
-            <div class="box box-info toggle" id="singleStats">
-                <div class="box-header"></div>
-                <div class="box-body">
-                    <#list list_Single as statSingle>
-                    <p class="singleStats">
-                    ${statSingle.code} :
-                    ${statSingle.name}
-                    </p>
-                    </#list>
-                </div>
-            </div>
             <#list list_List as statList>
-            <div class="box box-info toggle div_${statList.id}">
-                <div class="box-header"></div>
-                <div class="box-body">
-                    <div id="bar_${statList.id}"></div>
-                </div>
-            </div>              
-            <div class="box box-info toggle div_${statList.id}">
-                <div class="box-header"></div>
-                <div class="box-body">
-                    <div id="pie_${statList.id}"></div>
-                </div>
-            </div>
+                <#if statList.graphType = "True">
+                    <div class="box box-info toggle div_${statList.id}">
+                        <div class="box-header"></div>
+                        <div class="box-body">
+                            <div id="bar_${statList.id}"></div>
+                        </div>
+                    </div>              
+                    <div class="box box-info toggle div_${statList.id}">
+                        <div class="box-header"></div>
+                        <div class="box-body">
+                            <div id="pie_${statList.id}"></div>
+                        </div>
+                    </div>
+                </#if>
             </#list>
         </div>
     </div>

@@ -18,17 +18,6 @@ public interface IStat
      */
     String getName(  );
 
-    /**
-     * Returns the Result
-     * @return The Result
-     */
-    Object getResult(  );
-
-    /**
-     * Returns the Sql
-     * @return The Sql
-     */
-    String getSql(  );
     
     /**
      * Returns the Id
@@ -37,26 +26,26 @@ public interface IStat
     String getId(  );
 
     /**
+     * Returns the GraphType
+     * @return The GraphType
+     */
+    String getGraphType(  );
+    
+    /**
      * Sets the Name
      * @param strName The Name
      */
     void setName( String strName );
-
-    /**
-     * Sets the Result
-     * @param Result The Result
-     */
-    void setResult( Object Result );
-
-    /**
-     * Sets the Sql
-     * @param strSql The Sql
-     */
-    void setSql( String strSql );
-    
+   
     /**
      * Sets the Id
      * @param strId The Id
      */
     void setId( String strId );
+    
+    /**
+     * Sets the GraphType
+     * @param strGraphType The GraphType
+     */
+    void setGraphType( String strGraphType );
 }

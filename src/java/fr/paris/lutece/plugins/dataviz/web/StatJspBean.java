@@ -1,4 +1,4 @@
-/*
+ /*
  * Copyright (c) 2002-2013, Mairie de Paris
  * All rights reserved.
  *
@@ -35,20 +35,16 @@
  
 package fr.paris.lutece.plugins.dataviz.web;
 
+import fr.paris.lutece.plugins.dataviz.business.IStatList;
 import fr.paris.lutece.plugins.dataviz.business.Stat;
-import fr.paris.lutece.plugins.dataviz.business.StatList;
-import fr.paris.lutece.plugins.dataviz.business.StatSingle;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.util.ReferenceList;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import java.util.List;
 import java.util.Map;
-
-
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -69,7 +65,6 @@ public class StatJspBean extends ManageStatJspBean
     private static final String PROPERTY_PAGE_TITLE_MANAGE_STATS = "dataviz.manage_stats.pageTitle";
 
     // Markers
-    public static final String MARK_LIST_SINGLE = "list_Single";
     public static final String MARK_LIST_LIST = "list_List";
     
     // Views
@@ -80,25 +75,17 @@ public class StatJspBean extends ManageStatJspBean
     public String getManageStats( HttpServletRequest request )
     {
         Map<String, Object> model = new HashMap<String, Object>(  );
-        
-        List<StatSingle> listSimpleStat = SpringContextService.getBeansOfType( StatSingle.class );
-        ReferenceList listSingle = new ReferenceList ( );
-        
-        for ( StatSingle singleResult : listSimpleStat )
-        {
-            listSingle.addItem (singleResult.getName(), singleResult.getResult().toString() );
-        }
-        model.put( MARK_LIST_SINGLE, listSingle );
-        
-        List<StatList> listBeanStatList = SpringContextService.getBeansOfType( StatList.class );
+                       
+        List<IStatList> listBeanStatList = SpringContextService.getBeansOfType( IStatList.class );
         List<Stat> listStatList = new ArrayList ( );
         
-        for ( StatList statResult : listBeanStatList )
+        for ( IStatList statResult : listBeanStatList )
         {
             Stat item = new Stat( );
             item.setName( statResult.getName( ));
             item.setId( statResult.getId( ));
-            item.setList( (ReferenceList) statResult.getResult ( ));
+            item.setList( (ReferenceList) statResult.getList ( ));
+            item.setGraphType( statResult.getGraphType());
             listStatList.add( item );
         }
         model.put (MARK_LIST_LIST, listStatList);

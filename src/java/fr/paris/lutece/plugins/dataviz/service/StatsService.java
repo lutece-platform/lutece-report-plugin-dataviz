@@ -5,6 +5,7 @@
  */
 package fr.paris.lutece.plugins.dataviz.service;
 
+import fr.paris.lutece.plugins.dataviz.business.ISqlStat;
 import fr.paris.lutece.plugins.dataviz.business.IStat;
 import fr.paris.lutece.portal.service.cache.AbstractCacheableService;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
@@ -20,7 +21,7 @@ public class StatsService extends AbstractCacheableService
 {
     private static final String CACHE_SERVICE_NAME = "Dataviz Stats Cache";
     private static StatsService _singleton;
-    private static List<IStat> _listStat;
+    private static List<ISqlStat> _listStat;
 
     private StatsService(  )
     {
@@ -46,7 +47,7 @@ public class StatsService extends AbstractCacheableService
     {
         initCache();
         
-        _listStat = SpringContextService.getBeansOfType( IStat.class );
+        _listStat = SpringContextService.getBeansOfType( ISqlStat.class );
     }
 
     /**
@@ -57,14 +58,14 @@ public class StatsService extends AbstractCacheableService
      */
     public String getStat( String strStatName ) throws StatNotFoundException
     {
-        _listStat = SpringContextService.getBeansOfType( IStat.class );
+        _listStat = SpringContextService.getBeansOfType( ISqlStat.class );
         String strResult = (String) getFromCache( strStatName.toLowerCase(  ) );
 
         if ( strResult == null )
         {
             boolean bFound = false;
 
-            for ( IStat stat : _listStat )
+            for ( ISqlStat stat : _listStat )
             {
                 if ( strStatName.equalsIgnoreCase( stat.getName(  ) ) )
                 {

@@ -34,8 +34,6 @@
 package fr.paris.lutece.plugins.dataviz.business;
 
 import fr.paris.lutece.util.ReferenceList;
-import javax.validation.constraints.*;
-import org.hibernate.validator.constraints.*;
 
 
 /**
@@ -47,6 +45,7 @@ public class Stat
         private String _name;
         private ReferenceList _list;
         private String _id;
+        private String _graphType;
     
         /**
          * Returns the Name
@@ -100,5 +99,23 @@ public class Stat
         public void setList ( ReferenceList list )
         {
             _list = list;
+        }
+
+        /**
+         * Returns the GraphType
+         * @return The GraphType
+         */
+        public String getGraphType ( )
+        {
+            return _graphType;
+        }
+
+        /**
+	 * Sets the GraphType
+	 * @param GraphType The GraphType
+	 */
+        public void setGraphType ( String graphType )
+        {
+            _graphType = graphType;
         }
 }

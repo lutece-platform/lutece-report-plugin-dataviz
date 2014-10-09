@@ -10,7 +10,7 @@ package fr.paris.lutece.plugins.dataviz.business;
  * Override getResult to return result of SingleStat
  * @return The nResult
  */
-public class StatSingle extends AbstractStat
+public class StatSingle extends AbstractSqlStat
 {
     @Override
     public Object getResult(  )

@@ -12,13 +12,18 @@ import fr.paris.lutece.util.ReferenceList;
  * Override getResult to return result of ListStat
  * @return The list
  */
-public class StatList extends AbstractStat
+public class StatList extends AbstractSqlStat implements IStatList
 {
     @Override
     public Object getResult(  )
     {
-        ReferenceList list = (ReferenceList) StatHome.getListResult ( getSql( ) );
-        
-        return list;
+       
+        return getList ();
+    }
+
+    @Override
+    public ReferenceList getList() 
+    {
+        return (ReferenceList) StatHome.getListResult ( getSql( ) );
     }
 }
