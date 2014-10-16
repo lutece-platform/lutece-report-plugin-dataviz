@@ -9,14 +9,33 @@
     </div>
 </section><!-- /.box-header -->
 <section class="content">
-    <div class="row">
+    <div class="row row-height">
         <div class="col-md-4">
             <div class="box box-info">
                 <div class="box-header"></div>
                 <div class="box-body">
                     <div class="btn-group-vertical">
                         <#list list_List as statList>
-                        <button class="btn btn-flat btn-info" id="buttons_${statList.id}" name="${statList.id}">${statList.name}</button>
+                            <#if statList.graphType != "list">
+                            <button class="btn btn-info btn-flat" id="buttons_${statList.id}" name="${statList.id}">${statList.name}</button>
+                            </#if>
+                        </#list>
+                        <#list list_List as statList>
+                            <#if statList.graphType = "list">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">#i18n{dataviz.manage_stats.titleCountByArr}
+                                    <span class="fa fa-caret-down"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <#list list_List as statList>
+                                        <#if statList.graphType = "list">
+                                          <li><button class="btn btn-info btn-flat" id="buttons_${statList.id}" name="${statList.id}">${statList.name}</button></li>
+                                        </#if>
+                                    </#list>
+                                </ul>
+                            </div>
+                            <#break>
+                            </#if>
                         </#list>
                     </div>
                 </div>
@@ -32,7 +51,7 @@
                             <td class="codeValue">${multiStat.code}</td>
                             <td class="nameValue">${multiStat.name}</td>
                         </tr>
-                    </#list>
+                        </#list>
                     </table>
                 </div>
             </div>
@@ -40,7 +59,7 @@
         </div>
         <div class="col-md-8">
             <#list list_List as statList>
-                <#if statList.graphType = "True">
+                <#if statList.graphType != "False">
                     <div class="box box-info toggle div_${statList.id}">
                         <div class="box-header"></div>
                         <div class="box-body">
@@ -54,15 +73,28 @@
                         </div>
                     </div>
                 </#if>
+                <#if statList.graphType = "Curl">
+                    <div class="box box-info toggle div_${statList.id}">
+                        <div class="box-header"></div>
+                        <div class="box-body">
+                            <div id="curl_${statList.id}"></div>
+                        </div>
+                    </div>
+                </#if>
             </#list>
         </div>
     </div>
     <link href="css/plugins/dataviz/stats.css" rel="stylesheet"/>
     <link href="css/plugins/dataviz/jquery.jqplot.css" rel="stylesheet"/>
     <script type="text/javascript" src="js/plugins/dataviz/jquery.jqplot.js"></script>
-    <script type="text/javascript" src="js/plugins/dataviz/jqplot.barRenderer.min.js"></script>
-    <script type="text/javascript" src="js/plugins/dataviz/jqplot.categoryAxisRenderer.min.js"></script>
     <script type="text/javascript" src="js/plugins/dataviz/jqplot.pointLabels.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataviz/jqplot.highlighter.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataviz/jqplot.cursor.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataviz/jqplot.dateAxisRenderer.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataviz/jqplot.canvasTextRenderer.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataviz/jqplot.canvasAxisTickRenderer.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataviz/jqplot.categoryAxisRenderer.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataviz/jqplot.barRenderer.min.js"></script>
     <script type="text/javascript" src="js/plugins/dataviz/jqplot.pieRenderer.min.js"></script>
     <script type="text/javascript" src="js/plugins/dataviz/jqplot.donutRenderer.min.js"></script>
     <script src="js/plugins/dataviz/stats.js" type="text/javascript"></script>

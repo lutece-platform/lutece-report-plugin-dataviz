@@ -9,7 +9,7 @@ $(document).ready(function() {
         var tabCode = [];
         var tabName = [];
         $(this).find('td.codeValue').each(function() {
-            tabCode.push(parseInt($(this).html()));
+            tabCode.push($(this).html());
         })
         $(this).find('td.nameValue').each(function() {
             tabName.push(parseInt($(this).html()));
@@ -19,7 +19,7 @@ $(document).ready(function() {
         {
             data.push([tabCode[i], tabName[i]]);
         }
-        if ( $(this).attr('class') == "stat True")
+        if ( $(this).attr('class') != "stat False")
         {
             var plot1 = jQuery.jqplot("pie_" + listName, [data],
                     {
@@ -32,24 +32,26 @@ $(document).ready(function() {
                         legend: {show: true, location: 'e', rendererOptions: {numberColumns: 2}}
                     }
             );
-            var s1 = tabName;
             var ticks = tabCode;
-
-            var plot1 = $.jqplot("bar_" + listName, [s1], {
+            var plot1 = $.jqplot("bar_" + listName, [data], {
                 seriesDefaults: {
                     renderer: $.jqplot.BarRenderer,
                     rendererOptions: {fillToZero: true}
                 },
-                series: [
-                    {label: $('td.statName')}
-                ],
-                legend: {
-                    show: false
+                legend: { show: false },
+                axesDefaults: {
+                    tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
+                     tickOptions: {
+                        fontSize: '8pt'
+                    }
                 },
                 axes: {
                     xaxis: {
                         renderer: $.jqplot.CategoryAxisRenderer,
-                        ticks: ticks
+                        tickOptions: {
+                             angle: 30,
+                            formatString: '%b&nbsp;%#d'   // format string to use with the axis tick formatter
+                        }
                     },
                     yaxis: {
                         pad: 1.05,
@@ -57,13 +59,40 @@ $(document).ready(function() {
                     }
                 }
             });
+        
+        /*
+        * graph type curl source data bean VotePerDay
+        * @type @exp;jQuery@call;jqplot|@exp;$@call;jqplot|@exp;$@call;jqplot
+        *
+        * For next graph we need a date for frist field 
+        * date format : dd-jan-yy
+        * 
+        */
+        var reg=new RegExp("^[0-9]{2}[-]{1}[a-zA-Z]{3}[-]{1}[0-9]{2}$","g");
+        if (reg.test(data[0][0]))
+        {
+            var plot1 = jQuery.jqplot("curl_" + listName, [data],
+            {
+                axes:{
+                    xaxis:{
+                        renderer:$.jqplot.DateAxisRenderer,
+                        tickOptions:{ formatString:'%b&nbsp;%#d' }
+                    },
+                    yaxis:{
+                        tickOptions:{ formatString:'%d' }
+                    }
+                },
+                highlighter: {
+                    show: true,
+                    sizeAdjust: 7.5
+                },
+                cursor: { show: false }
+            });
         }
-        $("#button_" + listName).click(function(){
-            $('#div_bar_' + listName).slideToggle(0);
-            $("#div_pie_" + listName).slideToggle(0);
-        });
+    }
+      
     });
-    $('button[id*="buttons_"]').click(function(){
+    $('[id*="buttons_"]').click(function(){
         var divName = $(this).attr("name");
         if ($(".div_" + divName).is(':visible')){
             $(".div_" + divName).slideUp(200);
