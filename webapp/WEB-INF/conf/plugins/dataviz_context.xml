@@ -7,15 +7,16 @@
     <bean id="dataviz.statRest"  class="fr.paris.lutece.plugins.dataviz.web.rs.StatRest" />
 
     <bean id="dataviz.statDAO"  class="fr.paris.lutece.plugins.dataviz.business.StatDAO" />
+    
     <bean id="dataviz.stats.listGlobal" class="java.util.ArrayList">
         <constructor-arg>
             <list>
-                <ref bean="dataviz.stats.VoteCount" />
-                <ref bean="dataviz.stats.NumbUser" />
-                <ref bean="dataviz.stats.AverageAge" />                
+                <ref bean="dataviz.stats.pageCount" />
+                <ref bean="dataviz.stats.userCount" />
             </list>
         </constructor-arg>
     </bean>
+    
     <bean id="dataviz.stats.compositeGlobal" class="fr.paris.lutece.plugins.dataviz.business.CompositeStatList">
         <property name="statList"><ref bean="dataviz.stats.listGlobal" /></property>
         <property name="name"> 
@@ -28,390 +29,44 @@
             <value>False</value>
         </property>
     </bean>
-    <bean id="dataviz.stats.VoteCount" class="fr.paris.lutece.plugins.dataviz.business.StatSingle" > 
+    
+    <bean id="dataviz.stats.pageCount" class="fr.paris.lutece.plugins.dataviz.business.StatSingle" > 
         <property name="name"> 
-            <value>Nombre de votes</value>
+            <value>Number of pages</value>
         </property>
         <property name="id"> 
-            <value>VoteCount</value>
+            <value>NumbPage</value>
         </property>
         <property name="Sql">
-            <value>SELECT count( * ) FROM budgetparticipatif_votes</value>
+            <value>SELECT count( * ) FROM core_page</value>
         </property>
     </bean>
-    <bean id="dataviz.stats.NumbUser" class="fr.paris.lutece.plugins.dataviz.business.StatSingle" > 
+    
+    <bean id="dataviz.stats.userCount" class="fr.paris.lutece.plugins.dataviz.business.StatSingle" > 
         <property name="name"> 
-            <value>Nombres de votants</value>
+            <value>Number of users</value>
         </property>
         <property name="id"> 
             <value>NumbUser</value>
         </property>
         <property name="Sql">
-            <value>SELECT count( DISTINCT id_user ) FROM budgetparticipatif_votes</value>
+            <value>SELECT count( id_user ) FROM core_admin_user</value>
         </property>
     </bean>
-    <bean id="dataviz.stats.AverageAge" class="fr.paris.lutece.plugins.dataviz.business.StatSingle" > 
-        <property name="name"> 
-            <value>Age moyen</value>
-        </property>
-        <property name="id"> 
-            <value>AverageAge</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT AVG ( a.age ) FROM ( SELECT DISTINCT id_user, age FROM budgetparticipatif_votes ) AS a</value>
-        </property>
-    </bean>
-    <bean id="dataviz.stats.ProjVote" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Nombre de votes par projets</value>
-        </property>
-        <property name="id"> 
-            <value>ProjVote</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title , COUNT(*) FROM  budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document GROUP BY d.title</value>
-        </property>
-        <property name="graphType">
-            <value>True</value>
-        </property>
-    </bean>
+    
     <bean id="dataviz.stats.ProjAvgUser" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
         <property name="name"> 
-            <value>Age moyen par projets</value>
+            <value>List of pages</value>
         </property>
         <property name="id"> 
-            <value>ProjAvgUser</value>
+            <value>ListOfPages</value>
         </property>
         <property name="Sql">
-            <value>SELECT d.title , ROUND(AVG(age), 1) FROM  budgetparticipatif_votes AS b INNER JOIN document AS d ON b.id_projet = d.id_document GROUP BY d.title</value>
+            <value>SELECT name ,id_page FROM core_page</value>
         </property>
         <property name="graphType">
             <value>True</value>
         </property>
     </bean>
-    <bean id="dataviz.stats.NumbVoteArr" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Nombre de votes par arrondissement</value>
-        </property>
-        <property name="id"> 
-            <value>NumbVoteArr</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT arrondissement, count( * ) FROM budgetparticipatif_votes GROUP BY arrondissement</value>
-        </property>
-        <property name="graphType">
-            <value>True</value>
-        </property>
-    </bean>
-    <bean id="dataviz.stats.NumbUserArr" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Nombres de votants par arrondissement</value>
-        </property>
-        <property name="id"> 
-            <value>NumbUserArr</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT arrondissement, count( DISTINCT id_user ) FROM budgetparticipatif_votes GROUP BY arrondissement</value>
-        </property>
-        <property name="graphType">
-            <value>True</value>
-        </property>
-    </bean>
-    <bean id="dataviz.Stats.VotePerDay" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Nombres de votes par jour</value>
-        </property>
-        <property name="id"> 
-            <value>VotePerDay</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT DATE_FORMAT(DATE(date_vote), '%d-%b-%y') AS d, COUNT(id_user) FROM budgetparticipatif_votes GROUP BY d;</value>
-        </property>
-        <property name="graphType">
-            <value>Curl</value>
-        </property>
-    </bean>
-    <!-- Bean for count votes by projects by district -->
-    <bean id="dataviz.stats.VotesArr1" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75001 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr1</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75001 GROUP BY id_projet</value>
-        </property>
-      <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     
-     <bean id="dataviz.stats.VotesArr2" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75002 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr2</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75002 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
- 
-     <bean id="dataviz.stats.VotesArr3" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75003 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr3</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75003 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr4" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75004 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr4</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75004 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr5" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75005 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr5</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75005 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr6" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75006 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr6</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75006 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr7" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75007 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr7</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75007 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr8" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75008 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr8</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75008 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr9" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75009 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr9</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75009 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr10" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75010 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr10</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75010 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr11" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75011 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr11</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75011 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr12" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75012 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr12</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75012 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr13" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75013 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr13</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75013 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr14" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75014 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr14</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75014 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr15" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75015 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr15</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75015 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr16" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75016 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr16</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75016 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr17" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75017 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr17</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75017 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr18" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75018 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr18</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75018 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr19" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75019 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr19</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75019 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
-     <bean id="dataviz.stats.VotesArr20" class="fr.paris.lutece.plugins.dataviz.business.StatList" > 
-        <property name="name"> 
-            <value>Votes arrondissement 75020 </value>
-        </property>
-        <property name="id"> 
-            <value>VotesArr20</value>
-        </property>
-        <property name="Sql">
-            <value>SELECT d.title, count(*) FROM budgetparticipatif_votes AS b INNER JOIN document AS d on b.id_projet = d.id_document where arrondissement = 75020 GROUP BY id_projet</value>
-        </property>
-        <property name="graphType">
-            <value>list</value>
-        </property>
-    </bean>
+    
 </beans>
